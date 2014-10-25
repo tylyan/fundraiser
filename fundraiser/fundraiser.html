@@ -3,12 +3,36 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div style="float: right">
+   {{> loginButtons align="right"}}
+  </div>
+  {{> current_events}}
+  
 
-  {{> hello}}
+  {{> form}}
+  
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="current_events">
+  <ul>
+    {{#each event}}
+      <li class="event"><a href="#">{{name}}</a></li>
+    {{/each}}
+  </ul>
 </template>
+
+<template name="form">
+  <h1>Create Event</h1>
+  <form id="create_event">
+    <input type="radio" id="type" name="type" value="sponsor" checked>Sponsor
+    <input type="radio" id="type" name="type" value="donor">Donor<br>
+    <label for="event_name">Event Name: </label>
+    <input type="text" id="event_name"><br>
+    <label for="event_description">Event Description: </label>
+    <textarea name="event_description" id="event_description" form="create_event"></textarea><br>
+    <label for="goal">Goal: </label>
+    <input type="text" id="goal"><br>
+    <input type="submit" id="submit" value="Create"> 
+  </form>
+</template>
+

@@ -1,17 +1,33 @@
+Events = new Meteor.Collection('events');
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
 
-  Template.hello.helpers({
+  Template.current_events.helpers({
+    'event': function(){
+      return Events.find();
+    }
+  });
+
+  Template.form.helpers({
     counter: function () {
       return Session.get("counter");
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
+  Template.form.events({
+    'submit': function (theEvent, theTemplate) {
+      theEvent.preventDefault();
+      var eventName = theTemplate.find("#event_name").value;
+      var eventDescription = theTemplate.find("#event_description").value;
+      var goal = theTemplate.find("#goal").value;
+      var type;
+      if (theTemplate.find("#type").checked){
+        type = "sponsor";
+      }else{
+        type = "donor";
+      }
+      console.log(type);
+      Events.insert({name: eventName, type: type, description: eventDescription, goal: goal});
+      return false;
     }
   });
 }
