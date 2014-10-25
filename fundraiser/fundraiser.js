@@ -58,8 +58,10 @@ if (Meteor.isClient) {
       }else{
         type = "donor";
       }
+      var selectedEvent = Session.get('selectedEvent');
+      var email = Meteor.users.find({_id:Meteor.userId()}).fetch()[0].emails[0].address;
       console.log(type);
-      Events.insert({name: eventName, type: type, description: eventDescription, goal: goal, date: date, owner: Meteor.userId()});
+      Events.insert({name: eventName, type: type, description: eventDescription, goal: goal, date: date, owner: Meteor.userId(), email: email});
       document.getElementById('create_event').setAttribute('class', 'invis');
       document.getElementById('event_name').value = "";
       document.getElementById('event_description').value = "";
@@ -120,11 +122,10 @@ if (Meteor.isClient) {
       var currEvent = Events.find({_id: selectedEvent}).fetch();
       return currEvent[0].date;
     },
-    'owner': function(){
+    'email': function(){
       var selectedEvent = Session.get('selectedEvent');
       var currEvent = Events.find({_id: selectedEvent}).fetch();
-      var id = currEvent[0].owner;
-      return Meteor.users.find({_id:id}).fetch()[0].emails[0].address;
+      return currEvent[0].email;
     },
     'button': function(){
       var selectedEvent = Session.get('selectedEvent');
