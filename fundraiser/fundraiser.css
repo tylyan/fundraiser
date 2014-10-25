@@ -1,1 +1,99 @@
-/* CSS declarations go here */
+/***
+      General
+              ***/
+
+body{
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.invis{
+  visibility: hidden;
+}
+
+.visible{
+  visibility: visible;
+}
+
+h1{
+  margin: 0;
+}
+ul{
+  margin: 0;
+  list-style: none;
+}
+
+.donor.selected, .sponsor.selected {
+  background-color: tomato;
+}
+
+.sponsor {
+  background-color: red;
+}
+
+.donor {
+  background-color: blue;
+}
+
+/***
+    Current Events
+                ***/
+
+#current_events{
+  max-height: 400px;
+  width: 50%;
+  float: left;
+  overflow: auto;
+}
+
+#current_events ul{
+  padding: 0;
+}
+li.event {
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+  margin-left: 0;
+  padding: 7px 0 7px 10px;
+  width: 200px;
+}
+
+/***
+    Create Events
+                ***/
+
+#create_event{
+  padding: 15px;
+  border: 1px solid black;
+  clear: both;
+  background-color: gray;
+}
+
+/***
+    Control Panel
+              ***/
+
+#control_panel button{
+  margin: 0;
+  padding: 5px 10px;
+  border: 2px solid black;
+
+}
+
+/***
+    Event Details
+              ***/
+
+#event_details{
+  width: 50%;
+  float: right;
+}
+
+/***
+    Header
+            ***/
+
+#header{
+  padding: 5px;
+  border: 1px solid black;
+}

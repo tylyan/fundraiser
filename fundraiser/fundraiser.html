@@ -3,36 +3,73 @@
 </head>
 
 <body>
-  <div style="float: right">
-   {{> loginButtons align="right"}}
+  <div id="header">
+    <h1>Michael J. Fox Foundation</h1>
+    <div style="float: right">
+      {{> loginButtons align="right"}}
+    </div>
+    <div id="control_panel">
+      {{> control_panel}}
+    </div>
   </div>
-  {{> current_events}}
-  
+  <div id="info">
+    <div id="current_events">
+      {{> current_events}}
+    </div>
+    <div id="event_details">
+      {{> event_details}}
+    </div>
+  </div>
 
-  {{> form}}
-  
+  <div id="create_event" class="invis">
+    {{> create_event}}
+  </div>
+
 </body>
+
+<template name="control_panel">
+  <button id="showAll">Show All</button>
+  <button id="Sponsor">I'm a Sponsor!</button>
+  <button id="Donor">I'm a Donor!</button>
+  <button id="togglecreate">Create Event</button>
+</template>
 
 <template name="current_events">
   <ul>
     {{#each event}}
-      <li class="event"><a href="#">{{name}}</a></li>
+      <li class="event {{selectedClass}} {{type}} ">{{name}}</li>
     {{/each}}
   </ul>
 </template>
 
-<template name="form">
+<template name="create_event">
   <h1>Create Event</h1>
-  <form id="create_event">
+  <form id="create">
     <input type="radio" id="type" name="type" value="sponsor" checked>Sponsor
     <input type="radio" id="type" name="type" value="donor">Donor<br>
-    <label for="event_name">Event Name: </label>
+    <label for="event_name">Name: </label><br>
     <input type="text" id="event_name"><br>
-    <label for="event_description">Event Description: </label>
-    <textarea name="event_description" id="event_description" form="create_event"></textarea><br>
-    <label for="goal">Goal: </label>
+    <label for="date">Date: </label><br>
+    <input type="text" id="date"><br>
+    <label for="goal">Goal: </label><br>
     <input type="text" id="goal"><br>
+    <label for="event_description">Event Description: </label><br>
+    <textarea name="event_description" id="event_description" form="create_event"></textarea><br>
     <input type="submit" id="submit" value="Create"> 
   </form>
+</template>
+
+<template name="event_details">
+  {{#if name}}
+    <h1>Event Details</h1>
+    <ul>
+      <li><strong>{{name}}</strong></li>
+      {{#if owner}}<li>Event by: {{owner}}</li>{{/if}}
+      {{#if description}}<li>Description: {{description}}</li>{{/if}}
+      {{#if date}}<li>Date: {{date}}</li>{{/if}}
+      {{#if goal}}<li>Goal: {{goal}}</li>{{/if}}
+      <li><button onclick="partake()">{{button}}</button></li>
+    </ul>
+  {{/if}}
 </template>
 
